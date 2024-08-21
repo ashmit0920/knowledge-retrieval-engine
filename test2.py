@@ -12,4 +12,6 @@ model = ChatGroq(api_key=key, model=Model, temperature=0)
 
 llm = model | parser
 
-print(llm.invoke('What is Retrieval Augmented Generation?'))
+def invoke_llm(user_input):
+    result = llm.invoke(user_input)
+    return result
