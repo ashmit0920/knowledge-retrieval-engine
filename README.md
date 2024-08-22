@@ -10,3 +10,9 @@ This application allows users to upload a document (currently PDF only) to act a
 - Groq API Inference to run Llama 3 remotely
 - LangChain framework
 - Streamlit to build the web app
+
+## To-do list
+
+- Caching embeddings to improve response time, if possible
+- Better user interface
+- Splitting to chunks for large docs
