@@ -28,25 +28,28 @@ def extract_text(file_path):
     
     return text
 
-document_text = extract_text("sample_doc.pdf")
+def embed_text(user_file):
+    document_text = extract_text(user_file)
 
-# Embedding the extracted text and storing it in FAISS
-embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-texts = [document_text]  # If the document is large, consider splitting it into chunks
-faiss_index = FAISS.from_texts(texts, embedding_model)
+    # Embedding the extracted text and storing it in FAISS
+    embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    texts = [document_text]  # If the document is large, consider splitting it into chunks
+    faiss_index = FAISS.from_texts(texts, embedding_model)
 
-# Creating RetrievalQA Chain
-qa_chain = RetrievalQA.from_chain_type(
-    llm = llm,
-    chain_type = "stuff",  # Simple retrieval and generation strategy
-    retriever = faiss_index.as_retriever()
-)
+    # Creating RetrievalQA Chain
+    global qa_chain
+    
+    qa_chain = RetrievalQA.from_chain_type(
+        llm = llm,
+        chain_type = "stuff",  # Simple retrieval and generation strategy
+        retriever = faiss_index.as_retriever()
+    )
 
 # Querying the knowledge base
 def ask_question(query):
     answer = qa_chain.invoke(query)
     return answer['result']
 
-user_question = "What is Ashmit good at?"
-response = ask_question(user_question)
-print(response)
+# user_question = "What is Ashmit good at?"
+# response = ask_question(user_question)
+# print(response)

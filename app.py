@@ -1,11 +1,17 @@
 import streamlit as st
-from test2 import invoke_llm
+from test2 import embed_text, ask_question
 
 st.set_page_config(page_title="Knowledge Retrieval")
 
-st.header("Testing Llama 3")
-user_input = st.chat_input("Enter your question:")
+st.header(":blue[Knowledge Retrieval Engine]")
+st.markdown("##### Welcome! Upload a PDF to make it act as a knowledge base and ask any questions from it!")
 
-if user_input:
-    result = invoke_llm(user_input)
-    st.write(result)
+user_file = st.file_uploader("Upload your document (PDF only)", type="pdf")
+
+if user_file:
+    embed_text(user_file)
+    user_input = st.chat_input("Enter your question:")
+    
+    if user_input:
+        result = ask_question(user_input)
+        st.write(result)
