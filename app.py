@@ -13,5 +13,9 @@ if user_file:
     user_input = st.chat_input("Enter your question:")
     
     if user_input:
+        st.markdown("#### Query:")
+        st.write(user_input)
+
         result = ask_question(user_input)
+        st.markdown("#### Answer:")
         st.write(result)
