@@ -1,6 +1,6 @@
 # Knowledge Retrieval Engine
 
-This application allows users to upload a document (currently PDF only) to act as a custom knowledge base. You can then ask questions related to the uploaded pdf and a LLM would answer them.
+This RAG (Retrieval Augmented Generation) based application allows users to upload a document (currently PDF only) to act as a custom knowledge base. You can then ask questions related to the uploaded pdf and a LLM would answer them.
 
 ## Tools and Technologies Used
 

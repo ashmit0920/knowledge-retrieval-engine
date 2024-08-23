@@ -40,18 +40,11 @@ def embed_text(user_file):
 
     # Embedding the extracted text and storing it in FAISS
     embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-    texts = [document_text]  # If the document is large, consider splitting it into chunks
+    texts = [document_text]
     faiss_index = FAISS.from_texts(texts, embedding_model)
 
-    # Creating RetrievalQA Chain
     global qa_chain
     
-    # qa_chain = RetrievalQA.from_chain_type(
-    #     llm = llm,
-    #     chain_type = "map_reduce",  # Simple retrieval and generation strategy
-    #     retriever = faiss_index.as_retriever(),
-    #     promt=prompt_template
-    # )
     qa_chain = RetrievalQA.from_chain_type(
         llm = llm,
         chain_type = "stuff",
@@ -60,13 +53,12 @@ def embed_text(user_file):
         chain_type_kwargs = {"prompt": prompt_template}
     )
 
-# Example of querying with RAG
 def ask_question(query):
-    answer = qa_chain.run(query)
-    return answer
+    answer = qa_chain.invoke(query)
+    return answer['result']
 
 embed_text("sample_doc.pdf")
 
-user_question = "What does Ashmit like?"
+user_question = "What does ashmit like?"
 response = ask_question(user_question)
 print(response)
