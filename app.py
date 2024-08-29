@@ -3,7 +3,7 @@ from test2 import embed_text, ask_question
 
 st.set_page_config(page_title="Knowledge Retrieval")
 
-st.header(":blue[Knowledge Retrieval Engine]")
+st.header(":blue[Knowledge Retrieval]")
 st.markdown("##### Welcome! Upload a PDF to make it act as a knowledge base and ask any questions from it!")
 
 user_file = st.file_uploader("Upload your document (PDF only)", type="pdf")
