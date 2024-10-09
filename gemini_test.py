@@ -8,17 +8,20 @@ load_dotenv()
 GEMINI_KEY = os.getenv('gemini_key')
 
 genai.configure(api_key = GEMINI_KEY)
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 # Extracting text from pdf
-reader = PdfReader("sample_doc.pdf")
-file_text = ""
-for page in reader.pages:
-    file_text += page.extract_text()
+def extract_text(file):
+    reader = PdfReader(file)
+    file_text = ""
+    for page in reader.pages:
+        file_text += page.extract_text()
+    
+    return file_text
 
-model = genai.GenerativeModel("gemini-1.5-flash")
-response = model.generate_content(["what does ashmit like?", file_text], stream=True)
+def answer_query(user_input, file_text):
+    response = model.generate_content([f"Answer the following query based on the provided text, remember to STRICTLY NOT ANSWER any query that is unrelated to the provided text. The query is - {user_input}", file_text])
+    return response.text
 
-for chunk in response: # generating a output stream so we dont have to wait for the entire result
-    print(chunk.text, end="")
-
-# print(response.text)
+# for chunk in response: # generating a output stream so we dont have to wait for the entire result
+    # print(chunk.text, end="")
