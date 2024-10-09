@@ -4,7 +4,7 @@ This RAG (Retrieval Augmented Generation) based application allows users to uplo
 
 ## Tools and Technologies Used
 
-- Llama 3.1 70B versatile for answering user's queries
+- Llama 3.1 70B and Gemini 1.5 Flash for answering user's queries
 - HuggingFace's MiniLM-L6-v2 for embedding the text extracted from user's document
 - FAISS (Facebook AI Similarity Search) as a vector database
 - Groq API Inference to run Llama 3 remotely
@@ -15,5 +15,5 @@ This RAG (Retrieval Augmented Generation) based application allows users to uplo
 
 - Caching embeddings to improve response time, if possible
 - Better user interface
-- Splitting to chunks for large docs
+- Highlight answer text in original doc
 - Database integration
