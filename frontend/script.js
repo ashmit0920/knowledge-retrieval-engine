@@ -38,7 +38,7 @@ async function sendQuery() {
             body: JSON.stringify({ query: userQuery })
         });
         const data = await response.json();
-        chatBox.innerHTML += `<div class="bot"><strong>Response:</strong> ${data.response}</div>`;
+        chatBox.innerHTML += `<div class="bot"><strong>Response:</strong><div style="margin-top: 5px;">${data.response}</div></div>`;
         chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to bottom
     } catch (error) {
         console.error("Error sending query:", error);
