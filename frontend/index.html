@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Uploader and Query Interface</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Document and Query</h2>
+
+        <!-- Document Uploader -->
+        <div class="upload-section">
+            <input type="file" id="documentInput" accept=".pdf,.doc,.docx,.txt" />
+            <button onclick="uploadDocument()">Upload Document</button>
+        </div>
+
+        <!-- Chat Interface -->
+        <div class="chat-container" id="chatContainer">
+            <div id="chatBox"></div>
+            <input type="text" id="userQuery" placeholder="Type your query here..." />
+            <button onclick="sendQuery()">Send</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

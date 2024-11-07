@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 import PIL.Image
 from PyPDF2 import PdfReader
+from IPython.display import Markdown
 
 load_dotenv()
 GEMINI_KEY = os.getenv('gemini_key')
@@ -29,3 +30,8 @@ def summarize(file_text):
 
 # for chunk in response: # generating a output stream so we dont have to wait for the entire result
     # print(chunk.text, end="")
+
+file = genai.upload_file("sample_doc.pdf")
+# print(model.count_tokens([file, '\n\nCan you summarize this file?']))
+response = model.generate_content([file, '\n\nCan you summarize this file?'])
+print(response.text)

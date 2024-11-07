@@ -1,35 +1,43 @@
-import faiss
-from transformers import AutoTokenizer, AutoModel
-from langchain.chains import create_retrieval_chain
+from fastapi import FastAPI, File, UploadFile, Form, Request
+from fastapi.responses import FileResponse, JSONResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
+import os
 
-index = faiss.IndexFlatL2(768) 
-tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
-model = AutoModel.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
+app = FastAPI()
 
-def process_document(text):
-    chunks = text.split('\n\n')
-    embeddings = []
-    for chunk in chunks:
-        inputs = tokenizer(chunk, return_tensors='pt')
-        embeddings.append(model(**inputs).pooler_output.detach().numpy())
-    return chunks, embeddings
+# Set up directories
+UPLOAD_DIR = "uploaded_documents"
+os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-def add_document_to_index(text):
-    chunks, embeddings = process_document(text)
-    for embedding in embeddings:
-        index.add(embedding)
-    return chunks
+# Mount the frontend directory for serving static files
+app.mount("/frontend", StaticFiles(directory="frontend"), name="frontend")
 
-def answer_query(query):
-    query_embedding = model(**tokenizer(query, return_tensors='pt')).pooler_output.detach().numpy()
-    D, I = index.search(query_embedding, k=5) 
-    relevant_chunks = [chunks[i] for i in I[0]]
+# Model for receiving query
+class QueryRequest(BaseModel):
+    query: str
 
-    answer = create_retrieval_chain(input_documents=relevant_chunks, question=query)
-    return answer
+@app.get("/")
+async def get_homepage():
+    """Serve the main HTML page."""
+    return FileResponse("frontend/index.html")
 
-uploaded_text = "Ashmit is good programmer. He likes music and cars a lot."
-chunks = add_document_to_index(uploaded_text)
-user_query = "What does the document say about Ashmit?"
-response = answer_query(user_query)
-print(response)
+@app.post("/upload")
+async def upload_document(document: UploadFile = File(...)):
+    """Handle document upload."""
+    document_path = os.path.join(UPLOAD_DIR, document.filename)
+    with open(document_path, "wb") as f:
+        f.write(await document.read())
+    return {"message": "Document uploaded successfully", "filename": document.filename}
+
+@app.post("/query")
+async def query_document(request: QueryRequest):
+    """Handle queries."""
+    user_query = request.query
+    # Call the LLM function here
+    response_text = your_llm_function(user_query)
+    return JSONResponse(content={"response": response_text})
+
+def your_llm_function(query):
+    # Replace with the actual LLM logic
+    return "This is a placeholder response to the query: " + query
