@@ -29,7 +29,7 @@ async function sendQuery() {
     }
 
     const chatBox = document.getElementById("chatBox");
-    chatBox.innerHTML += `<div><strong>You:</strong> ${userQuery}</div>`;
+    chatBox.innerHTML += `<div class="user"><strong>Query:</strong> ${userQuery}</div>`;
 
     try {
         const response = await fetch("/query", {
@@ -38,10 +38,11 @@ async function sendQuery() {
             body: JSON.stringify({ query: userQuery })
         });
         const data = await response.json();
-        chatBox.innerHTML += `<div><strong>LLM:</strong> ${data.response}</div>`;
+        chatBox.innerHTML += `<div class="bot"><strong>Response:</strong> ${data.response}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to bottom
     } catch (error) {
         console.error("Error sending query:", error);
-        chatBox.innerHTML += `<div><strong>Error:</strong> Failed to retrieve response.</div>`;
+        chatBox.innerHTML += `<div class="bot"><strong>Error:</strong> Failed to retrieve response.</div>`;
     }
 
     document.getElementById("userQuery").value = "";
