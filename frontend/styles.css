@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     background-image: url('assets/opoy7.jpg');
     background-size: cover;
     color: #e3e3e3;
@@ -28,7 +28,7 @@ body::before {
     background-image: url('assets/opoy7.jpg');
     background-size: cover;
     background-position: center;
-    opacity: 0.8; /* Adjust this value to control the opacity of bg image*/
+    opacity: 0.8; /* Adjust this value to control the opacity of bg image */
     z-index: -1; /* Ensures it stays behind the main content */
 }
 
@@ -46,11 +46,11 @@ h1 {
     margin-bottom: 30px;
     margin-right: auto;
     margin-left: auto;
-    width: 400px;
+    width: 600px;
 }
 
 h1 span {
-    background: linear-gradient(60deg, #00aaff, #ff5733);
+    background: linear-gradient(75deg, #00aaff, #ff5733);
     -webkit-background-clip: text;
     color: transparent;
 }
@@ -199,4 +199,32 @@ input[type="text"]::placeholder {
 input[type="text"]:focus {
     outline: none;
     border-color: #8e2de2;
+}
+
+.response-markdown {
+    margin-top: 5px;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.response-markdown h1, .response-markdown h2, .response-markdown h3 {
+    color: #00aaff; /* Customize heading colors */
+}
+
+.response-markdown p {
+    margin: 0.5em 0;
+    color: #e3e3e3;
+}
+
+.response-markdown a {
+    color: #8e2de2;
+    text-decoration: underline;
+}
+
+.response-markdown code {
+    background-color: #333;
+    color: #e3e3e3;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 0.9rem;
 }

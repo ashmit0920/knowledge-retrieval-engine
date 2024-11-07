@@ -3,6 +3,7 @@ from fastapi.responses import FileResponse, JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import os
+from gemini import generate_response, genai_upload
 
 app = FastAPI()
 
@@ -28,16 +29,16 @@ async def upload_document(document: UploadFile = File(...)):
     document_path = os.path.join(UPLOAD_DIR, document.filename)
     with open(document_path, "wb") as f:
         f.write(await document.read())
+    
+    global file
+    file = genai_upload(document_path)
+
     return {"message": "Document uploaded successfully", "filename": document.filename}
 
 @app.post("/query")
 async def query_document(request: QueryRequest):
     """Handle queries."""
     user_query = request.query
-    # Call the LLM function here
-    response_text = your_llm_function(user_query)
+    # Calling the LLM function
+    response_text = generate_response(user_query, file)
     return JSONResponse(content={"response": response_text})
-
-def your_llm_function(query):
-    # Replace with the actual LLM logic
-    return "This is a placeholder response to the query: " + query

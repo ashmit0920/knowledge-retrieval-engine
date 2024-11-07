@@ -31,7 +31,12 @@ def summarize(file_text):
 # for chunk in response: # generating a output stream so we dont have to wait for the entire result
     # print(chunk.text, end="")
 
-file = genai.upload_file("sample_doc.pdf")
+def genai_upload(file_path):
+    file = genai.upload_file(file_path)
+    return file
+
 # print(model.count_tokens([file, '\n\nCan you summarize this file?']))
-response = model.generate_content([file, '\n\nCan you summarize this file?'])
-print(response.text)
+
+def generate_response(query, file):
+    response = model.generate_content([file, f'\n\nAnswer the following query based on the provided document, remember to STRICTLY NOT ANSWER any query that is unrelated to the provided document. The query is - {query}'])
+    return response.text
