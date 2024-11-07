@@ -21,12 +21,21 @@
         <h1 class="typewriter">Upload, Ask, <span>Discover</span></h1>
 
         <!-- Document Uploader Section -->
-        <div class="upload-section">
+        <!-- <div class="upload-section">
             <label for="documentInput" class="custom-file-upload">
                 <span>Choose Document</span>
                 <input type="file" id="documentInput" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.py,.c,.cpp,.html,.css,.js" />
             </label>
             <button onclick="uploadDocument()">Upload Document</button>
+        </div> -->
+
+        <div class="upload-section">
+            <label for="documentInput" class="custom-file-upload">
+                <span>Choose Document</span>
+                <input type="file" id="documentInput" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.py,.c,.cpp,.html,.css,.js" />
+            </label>
+            <div id="loading-spinner" class="spinner" style="display: none;"></div>
+            <p id="upload-status" style="display: none;">Uploading...</p>
         </div>
 
         <!-- Chat Interface Section -->

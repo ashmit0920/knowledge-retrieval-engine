@@ -26,14 +26,18 @@ async def get_homepage():
 @app.post("/upload")
 async def upload_document(document: UploadFile = File(...)):
     """Handle document upload."""
-    document_path = os.path.join(UPLOAD_DIR, document.filename)
-    with open(document_path, "wb") as f:
-        f.write(await document.read())
-    
-    global file
-    file = genai_upload(document_path)
+    try:
+        document_path = os.path.join(UPLOAD_DIR, document.filename)
+        with open(document_path, "wb") as f:
+            f.write(await document.read())
+        
+        global file
+        file = genai_upload(document_path)
 
-    return {"message": "Document uploaded successfully", "filename": document.filename}
+        return {"message": "Document uploaded successfully", "filename": document.filename}
+    
+    except Exception as e:
+        return JSONResponse(content={"message": f"Error: {str(e)}"}, status_code=500)
 
 @app.post("/query")
 async def query_document(request: QueryRequest):

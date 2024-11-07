@@ -102,7 +102,7 @@ nav {
     margin-bottom: 20px;
 }
 
-.custom-file-upload {
+/* .custom-file-upload {
     display: inline-block;
     padding: 10px 20px;
     color: #d1d5db;
@@ -119,7 +119,7 @@ nav {
 
 .custom-file-upload input {
     display: none;
-}
+} */
 
 button {
     padding: 10px 20px;
@@ -133,6 +133,49 @@ button {
 
 button:hover {
     background-color: #6a1bb8;
+}
+
+/* Styling for custom upload button */
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #00aaff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: #0077cc;
+}
+
+.custom-file-upload input {
+    display: none;
+}
+
+/* Spinner styles */
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid #00aaff;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin-top: 10px;
+}
+
+/* Spin animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Uploading status text */
+#upload-status {
+    font-size: 0.9rem;
+    color: #e3e3e3;
+    margin-top: 5px;
 }
 
 /* Chat Container */
@@ -208,7 +251,8 @@ input[type="text"]:focus {
 }
 
 .response-markdown h1, .response-markdown h2, .response-markdown h3 {
-    color: #00aaff; /* Customize heading colors */
+    color: #e3e3e3; /* Customize heading colors */
+    margin: 10px 0px;
 }
 
 .response-markdown p {
