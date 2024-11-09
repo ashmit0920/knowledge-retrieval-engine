@@ -4,10 +4,11 @@ import './Sidebar.css'
 function Sidebar() {
     return (
         <div className='sidebar'>
-            <h2>Menu</h2>
+            <h2>Mindsy.ai</h2>
             <nav>
                 <ul>
                     <li>Home</li>
+                    <li>Get Started</li>
                     <li>About Us</li>
                     <li>Contact</li>
                 </ul>
