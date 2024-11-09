@@ -39,8 +39,59 @@
   .features {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     text-align: left;
+    width: 80%;
+    margin: 30px auto;
+  }
+  
+  .features p {
+    font-size: 1em;
+    padding: 10px;
+    padding-left: 0;
+  }
+
+  /* Document Uploader Container */
+  .uploader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #1a1a2e;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .uploader-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border: 2px dashed #e94560;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #e94560;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .uploader-label:hover {
+    background-color: #e94560;
+    color: #ffffff;
+  }
+
+  .uploader-label span {
+    font-weight: 600;
+  }
+
+  .file-name {
+    margin-top: 10px;
+    color: #cccccc;
+    font-size: 1rem;
   }
   
   /* Main Chat Container */
