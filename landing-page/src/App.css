@@ -52,4 +52,5 @@ body {
   padding: 20px;
   background-color: #060611; /* Change background color as needed */
   min-height: 100vh;
+  width: 100%;
 }

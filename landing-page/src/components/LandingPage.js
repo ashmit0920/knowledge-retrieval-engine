@@ -4,7 +4,6 @@ import './LandingPage.css';
 function LandingPage() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
-  const [fileName, setFileName] = useState('');
   
   const handleSendMessage = (e) => {
     e.preventDefault();
@@ -12,13 +11,6 @@ function LandingPage() {
       const newMessages = [...messages, { sender: 'user', text: input }];
       setMessages([...newMessages, { sender: 'bot', text: 'Hello! How can I help you?' }]);
       setInput('');
-    }
-  };
-
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFileName(file.name);
     }
   };
 
@@ -46,21 +38,6 @@ function LandingPage() {
           <h3>Ease of Use</h3>
           <p>A simple, intuitive interface makes navigating and querying documents effortless.</p>
         </div>
-      </div>
-      
-      {/* Document Uploader */}
-      <div className="uploader-container">
-        <input
-          type="file"
-          id="file-upload"
-          accept=".pdf,.doc,.docx,.txt,.pptx,.csv,.xlsx"
-          onChange={handleFileUpload}
-          style={{ display: 'none' }}
-        />
-        <label htmlFor="file-upload" className="uploader-label">
-          <span>Drag & Drop or Browse Files</span>
-        </label>
-        {fileName && <div className="file-name">{fileName}</div>}
       </div>
 
     </div>
