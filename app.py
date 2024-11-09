@@ -7,10 +7,10 @@ st.set_page_config(page_title="Knowledge Retrieval")
 st.header(":blue[Knowledge Retrieval]")
 st.markdown("##### Welcome! Upload a PDF to make it act as a knowledge base and ask any questions from it!")
 
-st.sidebar.selectbox(
-    "Select your LLM",
-    ("Gemini 1.5 Flash", "Llama 3.1 70B")
-)
+# st.sidebar.selectbox(
+#     "Select your LLM",
+#     ("Gemini 1.5 Flash", "Llama 3.1 70B")
+# )
 
 user_file = st.file_uploader("Upload your document (PDF only)", type="pdf")
 
