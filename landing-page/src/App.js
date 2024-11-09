@@ -1,23 +1,25 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import LandingPage from './LandingPage';
-import ChatSection from './ChatSection'; // Import your new ChatSection
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LandingPage from './components/LandingPage';
+import ChatSection from './components/ChatSection';
+import Sidebar from './components/Sidebar';
+import './App.css'
 
 function App() {
   return (
     <Router>
       <div className="app">
-        {/* Sidebar */}
+        {/* Sidebar always visible */}
+        <Sidebar />
         
-
-        {/* Main Content */}
+        {/* Main content area */}
         <div className="main-content">
           <Routes>
-            {/* Home Page Route */}
-            <Route exact path="/" element={LandingPage} />
+            {/* Home Page Route (LandingPage) */}
+            <Route path="/" element={<LandingPage />} />
 
             {/* Get Started / Chat Section Route */}
-            <Route path="/get-started" element={ChatSection} />
+            <Route path="/get-started" element={<ChatSection />} />
           </Routes>
         </div>
       </div>
