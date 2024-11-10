@@ -1,11 +1,21 @@
 from fastapi import FastAPI, File, UploadFile, Form, Request
 from fastapi.responses import FileResponse, JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import os
 from gemini import generate_response, genai_upload
 
 app = FastAPI()
+
+# Allow CORS for frontend's URL
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # React app's URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Set up directories
 UPLOAD_DIR = "uploaded_documents"

@@ -1,18 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './LandingPage.css';
 
 function LandingPage() {
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
-  
-  const handleSendMessage = (e) => {
-    e.preventDefault();
-    if (input.trim()) {
-      const newMessages = [...messages, { sender: 'user', text: input }];
-      setMessages([...newMessages, { sender: 'bot', text: 'Hello! How can I help you?' }]);
-      setInput('');
-    }
-  };
 
   return (
     <div className="landing-page">

@@ -5,6 +5,8 @@ function ChatSection() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [fileName, setFileName] = useState('');
+  const [uploadStatus, setUploadStatus] = useState('');
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleSendMessage = (e) => {
     e.preventDefault();
@@ -15,10 +17,33 @@ function ChatSection() {
     }
   };
 
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
+  const handleFileUpload = async (event) => {
+    const file = event.target.files[0];
     if (file) {
       setFileName(file.name);
+
+      // Prepare file for upload
+      const formData = new FormData();
+      formData.append('document', file);  // FastAPI expects the field name "document"
+
+      try {
+        // Upload file to FastAPI backend
+        const response = await fetch('http://localhost:8000/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setUploadStatus('Document uploaded successfully!');
+          console.log('Response from server:', data);
+        } else {
+          setUploadStatus('Upload failed');
+        }
+      } catch (error) {
+        console.error('Error uploading document:', error);
+        setUploadStatus('Upload failed');
+      }
     }
   };
 
@@ -39,6 +64,7 @@ function ChatSection() {
           <span>Drag & Drop or Browse Files</span>
         </label>
         {fileName && <div className="file-name">{fileName}</div>}
+        {uploadStatus && <div className='upload-status'>{uploadStatus}</div>}
       </div>
 
       {/* Chat Interface */}
