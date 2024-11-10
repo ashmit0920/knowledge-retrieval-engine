@@ -8,19 +8,45 @@ function ChatSection() {
   const [uploadStatus, setUploadStatus] = useState('');
   const [isUploading, setIsUploading] = useState(false);
 
-  const handleSendMessage = (e) => {
+  const handleSendMessage = async (e) => {
     e.preventDefault();
     if (input.trim()) {
       const newMessages = [...messages, { sender: 'user', text: input }];
-      setMessages([...newMessages, { sender: 'bot', text: 'Hello! How can I help you?' }]);
-      setInput('');
+      setMessages(newMessages);
+      
+      try {
+        // Send user message to backend
+        const response = await fetch('http://localhost:8000/query', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ query: input }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          // Add bot response to messages
+          setMessages([...newMessages, { sender: 'bot', text: data.response }]);
+        } else {
+          console.error('Error fetching response from bot');
+          setMessages([...newMessages, { sender: 'bot', text: 'Error fetching response' }]);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        setMessages([...newMessages, { sender: 'bot', text: 'Error connecting to bot' }]);
+      } finally {
+        setInput(''); // Clear input field
+      }
     }
   };
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      setFileName(file.name);
+      setFileName(''); // Clear previous file name
+      setUploadStatus(''); // Clear previous status message
+      setIsUploading(true); // Set loading state to true
 
       // Prepare file for upload
       const formData = new FormData();
@@ -34,15 +60,20 @@ function ChatSection() {
         });
 
         if (response.ok) {
+          
           const data = await response.json();
-          setUploadStatus('Document uploaded successfully!');
-          console.log('Response from server:', data);
+          setFileName(file.name);
+          setUploadStatus('');
+          // console.log('Response from server:', data);
+
         } else {
           setUploadStatus('Upload failed');
         }
       } catch (error) {
         console.error('Error uploading document:', error);
         setUploadStatus('Upload failed');
+      } finally {
+        setIsUploading(false);
       }
     }
   };
@@ -60,11 +91,24 @@ function ChatSection() {
           onChange={handleFileUpload}
           style={{ display: 'none' }}
         />
+
         <label htmlFor="file-upload" className="uploader-label">
           <span>Drag & Drop or Browse Files</span>
         </label>
-        {fileName && <div className="file-name">{fileName}</div>}
-        {uploadStatus && <div className='upload-status'>{uploadStatus}</div>}
+
+        {/* Show loading spinner during upload */}
+        {isUploading ? (
+          <div className="uploading-status">
+            <span>Uploading...</span>
+            <span className="spinner"></span>
+          </div>
+        ) : (
+          fileName && <div className="file-name">{fileName}</div>
+        )}
+
+        {/* Show upload status message if any */}
+        {uploadStatus && <div className="upload-status">{uploadStatus}</div>} 
+      
       </div>
 
       {/* Chat Interface */}

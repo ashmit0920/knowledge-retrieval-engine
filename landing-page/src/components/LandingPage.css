@@ -140,6 +140,8 @@
     align-self: flex-end;
     border-color: #2087ad;
     color: #cccccc;
+    text-align: left;
+    line-height: 1.75em;
   }
 
   /* Bot Message Bubble (Left) */
@@ -147,6 +149,9 @@
     align-self: flex-start;
     border-color: #33334d;
     color: #cccccc;
+    text-align: left;
+    line-height: 1.75em;
+    max-width: 100%;
   }
 
   /* Fixed Input Field at Bottom */
@@ -171,3 +176,27 @@
     color: #ffffff;
     border-radius: 25px;
   }
+
+  .uploading-status {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #ffffff;
+    margin-top: 10px;
+  }
+  
+  .spinner {
+    margin-left: 8px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.6); /* Light border */
+    border-top: 2px solid #ffffff; /* Darker border */
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
