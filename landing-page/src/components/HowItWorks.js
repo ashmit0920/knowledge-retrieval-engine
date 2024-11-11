@@ -27,6 +27,13 @@ function HowItWorks() {
           <p>Receive a context-aware answer tailored to your query.</p>
         </div>
       </div>
+
+      {/* GIF Tutorial Section */}
+      <div className="gif-tutorial">
+        <h2>Watch a Quick Tutorial</h2>
+        <img src="/mindsyTutorial.gif" alt="How it works tutorial" className="tutorial-gif" />
+      </div>
+
     </div>
   );
 }
