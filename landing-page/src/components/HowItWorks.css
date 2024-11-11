@@ -1,0 +1,53 @@
+.how-it-works {
+    padding: 20px 20px;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  .how-it-works h2 {
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  
+  .timeline {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .timeline-item {
+    flex: 1;
+    min-width: 200px;
+    max-width: 350px;
+    margin: 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: transform 0.3s;
+  }
+  
+  .timeline-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .icon {
+    font-size: 2.5em;
+    color: #89c9b8;
+    margin-bottom: 10px;
+  }
+  
+  .timeline-item h3 {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #ccd6f6;
+  }
+  
+  .timeline-item p {
+    font-size: 1em;
+    color: #cccccc;
+    margin: 0;
+  }
+  

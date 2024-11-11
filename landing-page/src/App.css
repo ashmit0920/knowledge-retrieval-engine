@@ -49,7 +49,7 @@ body {
 /* Main Content Styles */
 .main-content {
   margin-left: 200px; /* Adjust according to sidebar width */
-  padding: 20px;
+  padding: 20px 0px;  
   background-color: #060611; /* Change background color as needed */
   min-height: 100vh;
   width: 100%;

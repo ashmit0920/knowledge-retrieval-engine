@@ -35,6 +35,11 @@
     margin-bottom: 30px;
   }
 
+  .subheading {
+    text-align: left;
+    width: 80%;
+  }
+
   /* Features Section */
   .features {
     display: flex;
