@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import './LandingPage.css';
 
 function ChatSection() {
@@ -112,7 +115,7 @@ function ChatSection() {
       </div>
 
       {/* Chat Interface */}
-      <div className="chat-container">
+      {/* <div className="chat-container">
         <div className="chat-messages">
           {messages.map((message, index) => (
             <div
@@ -120,6 +123,46 @@ function ChatSection() {
               className={`chat-message ${message.sender === 'user' ? 'user-message' : 'bot-message'}`}
             >
               {message.text}
+            </div>
+          ))}
+        </div> */}
+      
+      {/* Chat Interface */}
+      <div className="chat-container">
+        <div className="chat-messages">
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              className={`chat-message ${message.sender === 'user' ? 'user-message' : 'bot-message'}`}
+            >
+              {message.sender === 'bot' ? (
+                <div className='bot-message'>
+                  <ReactMarkdown
+                    children={message.text}
+                    components={{
+                      code({ node, inline, className, children, ...props }) {
+                        const match = /language-(\w+)/.exec(className || '');
+                        return !inline && match ? (
+                          <SyntaxHighlighter
+                            style={okaidia} // Use a syntax highlighting theme
+                            language={match[1]}
+                            PreTag="div"
+                            {...props}
+                          >
+                            {String(children).replace(/\n$/, '')}
+                          </SyntaxHighlighter>
+                        ) : (
+                          <code className={className} {...props}>
+                            {children}
+                          </code>
+                        );
+                      },
+                    }}
+                  />
+                </div>
+              ) : (
+                message.text
+              )}
             </div>
           ))}
         </div>

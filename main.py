@@ -22,16 +22,16 @@ UPLOAD_DIR = "uploaded_documents"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 # Mount the frontend directory for serving static files
-app.mount("/frontend", StaticFiles(directory="frontend"), name="frontend")
+# app.mount("/frontend", StaticFiles(directory="frontend"), name="frontend")
 
 # Model for receiving query
 class QueryRequest(BaseModel):
     query: str
 
-@app.get("/")
-async def get_homepage():
-    """Serve the main HTML page."""
-    return FileResponse("frontend/index.html")
+# @app.get("/")
+# async def get_homepage():
+#     """Serve the main HTML page."""
+#     return FileResponse("frontend/index.html")
 
 @app.post("/upload")
 async def upload_document(document: UploadFile = File(...)):

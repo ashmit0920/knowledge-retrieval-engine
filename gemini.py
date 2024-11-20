@@ -1,15 +1,13 @@
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
-import PIL.Image
 from PyPDF2 import PdfReader
-from IPython.display import Markdown
 
 load_dotenv()
 GEMINI_KEY = os.getenv('gemini_key')
 
 genai.configure(api_key = GEMINI_KEY)
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-1.5-flash-8b")
 
 # Extracting text from pdf
 def extract_text(file):
