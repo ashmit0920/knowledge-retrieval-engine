@@ -1,6 +1,6 @@
-# Knowledge Retrieval Engine
+# Mindsy.ai
 
-This RAG (Retrieval Augmented Generation) based application allows users to upload a document (currently PDF only) to act as a custom knowledge base. You can then ask questions related to the uploaded pdf and a LLM would answer them.
+This RAG (Retrieval Augmented Generation) based application allows users to upload a document to act as a custom knowledge base. You can then ask questions related to the uploaded pdf and a LLM would answer them.
 
 ## Tools and Technologies Used
 
@@ -9,11 +9,10 @@ This RAG (Retrieval Augmented Generation) based application allows users to uplo
 - FAISS (Facebook AI Similarity Search) as a vector database
 - Groq API Inference to run Llama 3 remotely
 - LangChain framework
-- Streamlit to build the web app
+- React.js to build the web app
 
 ## To-do list
 
 - Caching embeddings to improve response time, if possible
-- Better user interface
 - Highlight answer text in original doc
 - Database integration
