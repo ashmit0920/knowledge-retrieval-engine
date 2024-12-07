@@ -11,7 +11,7 @@ app = FastAPI()
 # Allow CORS for frontend's URL
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # React app's URL
+    allow_origins=["http://localhost:3000", "https://mindsy-ai.vercel.app/get-started", "https://mindsy-ai.vercel.app/"],  # React app's URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
