@@ -73,20 +73,24 @@ cd mindsy.ai
    The frontend will run at `http://localhost:3000/`.  
 
 ### 4. Setting Up the Backend
-1. Navigate to the `root` directory:  
+1. Navigate to the `root` directory:
+
    ```bash  
    cd ..
    ```  
 2. Create a Python virtual environment (optional but recommended):  
+
    ```bash  
    python -m venv env  
    env/Scripts/activate  # On Linux, use `source env/bin/activate`  
    ```  
 3. Install the required Python dependencies:  
+
    ```bash  
    pip install -r requirements.txt  
    ```
 4. Start the FastAPI backend using Uvicorn:  
+
    ```bash  
    uvicorn main:app --reload  
    ```  
